@@ -38,7 +38,7 @@ app.post("/add", async (req, res)=>{
   const input = req.body["country"];
 
   try{
-  const result = await db.query("SELECT country_code FROM countries where country_name=$1",
+  const result = await db.query("SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '&'  ",
     [input]);
   
     const data = result.rows[0];
